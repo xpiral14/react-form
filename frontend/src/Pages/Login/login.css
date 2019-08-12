@@ -41,17 +41,13 @@
 .buttons {
     width: 100%;
     max-width: 300px;
-    display: flex;
-    justify-content: space-between;
 }
+
 .Login .buttons a{
-    background-color: #fff;
-    box-shadow: 0 5px 5px #00000008;
     padding: 5px;
     text-decoration: none;
     color: #707070;
     margin-top: 15px;
-    float: right;
 }
 .Login .buttons a, .Login form{
     background-color: #fff;

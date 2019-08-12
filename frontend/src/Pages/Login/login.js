@@ -40,7 +40,8 @@ export default class Login extends Component {
             .then(response => {
                 if (response.success) {
                     localStorage.setItem('token_login', response.token)
-                    console.log("Token guardado na local Storage");
+                    
+                    alert("Você foi logado com sucesso!")
                 } else {
                     alert(response.message);
                 }
@@ -52,7 +53,6 @@ export default class Login extends Component {
                 })
             })
 
-        console.log(JSON.stringify(data));
     }
     handleEmail(e) {
         this.setState({
@@ -76,7 +76,7 @@ export default class Login extends Component {
                     <button type="submit" onClick={this.handleButton}> Enviar </button>
                 </form>
                 <div className="buttons">
-                    <Link to="/forgotPassword">Esqueceu a senha?</Link>
+                    
                     <Link to="/register">Registrar</Link>
                 </div>
             </div>
