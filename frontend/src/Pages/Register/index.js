@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 
 import './register.css'
@@ -7,9 +7,12 @@ import './register.css'
 import { URL_BACKEND } from '../../config'
 
 export default function Register() {
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  let [name, setName] = useState('')
+  let [email, setEmail] = useState('')
+  let [password, setPassword] = useState('')
+  let [success, setSuccess] = useState(false)
+  let [logged, setLogged] = useState(false)
+  let [totalUser, setTotalUsers] = useState(0)
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -26,9 +29,11 @@ export default function Register() {
       .then(response => response.json())
       .then(response => {
         if (response.success) {
-          alert("Cadastrado com sucesso!")
+          setSuccess(true)
+          console.log(response.data);
         } else {
-          alert(response.message);
+          alert(response);
+          console.log(response.pass);
         }
 
       })
@@ -39,10 +44,11 @@ export default function Register() {
   return (
     <div className="register">
       <form action="/register" method="POST" onSubmit={handleSubmit}>
+        {success ? <h3> Registrado com sucesso</h3> : ''}
         <h1>Registrar-se</h1>
         <input type="text" placeholder="Nome" onChange={(e) => setName(e.target.value)} />
-        <input type="text" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
-        <input type="text" placeholder="Senha" onChange={(e) => setPassword(e.target.value)} />
+        <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
+        <input type="password" placeholder="Senha" onChange={(e) => setPassword(e.target.value)} />
         <button type="submit">Registrar</button>
       </form>
       <div className="buttons">

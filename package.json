@@ -1,0 +1,21 @@
+{
+  "name": "react-form",
+  "version": "1.0.0",
+  "description": "Formulário simples com react\r O intuito deste projeto é somente acadêmico, ou seja, estou desenvolvendo este formulário para aprender mais sobre as ferramentas realcionadas ao react e como conectá-lo com uma api feita com express.",
+  "main": "index.js",
+  "scripts": {
+    "front": "cd frontend & npm start",
+    "back": "cd backend & npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xpiral14/react-form.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xpiral14/react-form/issues"
+  },
+  "homepage": "https://github.com/xpiral14/react-form#readme"
+}

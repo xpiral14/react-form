@@ -6,8 +6,9 @@ import './login.css'
 import {
     URL_BACKEND
 } from '../../config'
-import { Link } from 'react-router-dom'
-
+import {
+    Link
+} from 'react-router-dom'
 export default class Login extends Component {
     constructor(props) {
         super(props)
@@ -15,10 +16,12 @@ export default class Login extends Component {
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handlePass = this.handlePass.bind(this)
         this.handleEmail = this.handleEmail.bind(this)
+        this.isLogged = this.isLogged.bind(this)
         this.state = {
             email: '',
             pass: '',
-            register: false
+            logged: false,
+            totalUser: 0
         }
     }
     handleSubmit(e) {
@@ -40,8 +43,28 @@ export default class Login extends Component {
             .then(response => {
                 if (response.success) {
                     localStorage.setItem('token_login', response.token)
-                    
-                    alert("Você foi logado com sucesso!")
+                    this.setState({
+                        email: '',
+                        pass: ''
+                    })
+                    let token = localStorage.getItem('token_login')
+                    this.setState({ logged: true })
+                    fetch(`${URL_BACKEND}/users`, {
+                        method: 'GET',
+                        headers: {
+                            'authorization': 'bearer ' + token
+                        }
+                    })
+                        .then(response => response.json())
+                        .then(response => {
+                            this.setState({
+                                totalUser: response.length
+                            })
+                            document.title = `React-Form: Total de usuários: ${this.state.totalUser}`
+
+                        })
+                        .catch(err => console.log(err))
+
                 } else {
                     alert(response.message);
                 }
@@ -52,7 +75,6 @@ export default class Login extends Component {
                     register: true
                 })
             })
-
     }
     handleEmail(e) {
         this.setState({
@@ -64,22 +86,26 @@ export default class Login extends Component {
             pass: e.target.value
         })
     }
-
+    isLogged(){
+        return this.state.logged ? <h4>Logado com sucesso!</h4> : ''
+        
+    }
 
     render() {
         return (
-            <div className="Login" onSubmit={this.handleSubmit}>
-                <form action="/login" method="POST">
-                    <h1> Formulario </h1>
-                    <input type="text" placeholder="Email" onChange={this.handleEmail} />
-                    <input type="password" placeholder="Senha" onChange={this.handlePass} />
-                    <button type="submit" onClick={this.handleButton}> Enviar </button>
-                </form>
-                <div className="buttons">
-                    
-                    <Link to="/register">Registrar</Link>
-                </div>
+        <div className="Login" onSubmit={this.handleSubmit}>
+            <form action="/login" method="POST">
+                {this.isLogged()}
+                <h1> Formulario </h1>
+                <input type="text" placeholder="Email" onChange={this.handleEmail} />
+                <input type="password" placeholder="Senha" onChange={this.handlePass} />
+                <button type="submit" onClick={this.handleButton}> Enviar </button>
+            </form>
+            <div className="buttons" >
+
+                < Link to="/register" > Registrar </Link>
             </div>
+        </div>
         )
     }
 }
