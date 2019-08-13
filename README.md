@@ -15,3 +15,4 @@ react-form> cd frontend & npm install
 //Após o fim da instalação
 react-form\frontend> npm start 
 ```
+> A melhor forma de aprender, é a prática.
