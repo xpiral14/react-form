@@ -1,0 +1,14 @@
+.users{
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    box-shadow: 0 4px 6px #00000008;
+    padding: 10px;
+    background-color: #fff;
+}
+h4, h3{
+    font-family: 'Nunito', sans-serif;
+}
+hr{
+    margin: 10px 0;
+}

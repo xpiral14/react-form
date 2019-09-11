@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
 
 import './register.css'
@@ -11,8 +11,6 @@ export default function Register() {
   let [email, setEmail] = useState('')
   let [password, setPassword] = useState('')
   let [success, setSuccess] = useState(false)
-  let [logged, setLogged] = useState(false)
-  let [totalUser, setTotalUsers] = useState(0)
 
   function handleSubmit(e) {
     e.preventDefault()

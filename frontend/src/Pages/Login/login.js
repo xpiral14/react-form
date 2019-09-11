@@ -9,6 +9,7 @@ import {
 import {
     Link
 } from 'react-router-dom'
+import Users from '../users/index-rc'
 export default class Login extends Component {
     constructor(props) {
         super(props)
@@ -93,6 +94,8 @@ export default class Login extends Component {
 
     render() {
         return (
+            <>
+            {this.state.logged ? <Users /> : ''}
         <div className="Login" onSubmit={this.handleSubmit}>
             <form action="/login" method="POST">
                 {this.isLogged()}
@@ -106,6 +109,7 @@ export default class Login extends Component {
                 < Link to="/register" > Registrar </Link>
             </div>
         </div>
+        </>
         )
     }
 }
